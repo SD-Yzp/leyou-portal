@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>设置-个人信息</title>
+     <link rel="icon" href="/assets/img/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+</head>
+
+<body>
+    <!--页面顶部白条条，由js动态加载-->
+	<script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
+	<div class="nav-bottom"></div>
+    <script type="text/javascript">$(".nav-bottom").load("top.html");</script>
+
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#service").hover(function(){
+		$(".service").show();
+	},function(){
+		$(".service").hide();
+	});
+	$("#shopcar").hover(function(){
+		$("#shopcarlist").show();
+	},function(){
+		$("#shopcarlist").hide();
+	});
+
+})
+</script>
+<script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="js/widget/nav.js"></script>
+<script type="text/javascript" src="js/plugins/birthday/birthday.js"></script>
+<script type="text/javascript" src="js/plugins/citypicker/distpicker.data.js"></script>
+<script type="text/javascript" src="js/plugins/citypicker/distpicker.js"></script>
+<script type="text/javascript" src="js/plugins/upload/uploadPreview.js"></script>
+<script type="text/javascript" src="js/pages/main.js"></script>
+<script>
+            $(function() {               
+                $.ms_DatePicker({
+                    YearSelector: "#select_year2",
+                    MonthSelector: "#select_month2",
+                    DaySelector: "#select_day2"
+                });
+            });
+        </script>
+</body>
+    <!--header-->
+    <div id="account">
+        <div class="py-container">
+            <div class="yui3-g home">
+                <!--左侧列表-->
+                <div class="yui3-u-1-6 list">
+
+                    <div class="person-info">
+                        <div class="person-photo"><img src="img/_/photo.png" alt=""></div>
+                        <div class="person-account">
+                            <span class="name">{{userInfo.username}}</span>
+                            <span class="safe">账户安全</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="list-items">
+                        <dl>
+							<dt><i>·</i> 订单中心</dt>
+							<dd ><a href="home-index.html"   >我的订单</a></dd>
+							<dd><a href="home-order-pay.html" >待付款</a></dd>
+							<dd><a href="home-order-send.html"  >待发货</a></dd>
+							<dd><a href="home-order-receive.html" >待收货</a></dd>
+							<dd><a href="home-order-evaluate.html" >待评价</a></dd>
+						</dl>
+						<dl>
+							<dt><i>·</i> 我的中心</dt>
+							<dd><a href="home-person-collect.html" >我的收藏</a></dd>
+							<dd><a href="home-person-footmark.html" >我的足迹</a></dd>
+						</dl>
+						<dl>
+							<dt><i>·</i> 物流消息</dt>
+						</dl>
+						<dl>
+							<dt><i>·</i> 设置</dt>
+							<dd><a href="home-setting-info.html" class="list-active">个人信息</a></dd>
+							<dd><a href="home-setting-address.html"  >地址管理</a></dd>
+							<dd><a href="home-setting-safe.html" >安全管理</a></dd>
+						</dl>
+                    </div>
+                </div>
+                <!--右侧主内容-->
+                <div class="yui3-u-5-6">
+                    <div class="body userInfo">
+                        <ul class="sui-nav nav-tabs nav-large nav-primary ">
+                            <li class="active"><a href="#one" data-toggle="tab">基本资料</a></li>
+                            <li><a href="#two" data-toggle="tab">头像照片</a></li>
+                        </ul>
+                        <div class="tab-content ">
+                            <div id="one" class="tab-pane active">
+                                <form id="form-msg" class="sui-form form-horizontal">
+                                    <div class="control-group">
+                                        <label for="inputName" class="control-label">昵称：</label>
+                                        <div class="controls">
+                                            <input type="text" id="inputName" name="email" v-model="user.nickName" placeholder="昵称">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="gender" class="control-label" >性别：</label>
+                                        <div class="controls">
+                                            <label data-toggle="radio" class="radio-pretty inline">
+                                            <input type="radio" checked  id="gender" name="gender" v-model="user.gender " value="1"><span>男</span>
+                                        </label>
+                                            <label data-toggle="radio" class="radio-pretty inline">
+                                            <input type="radio" id="gender" name="gender" value="2"><span>女</span>
+                                        </label>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="inputPassword" class="control-label">生日：</label>
+                                        <div class="controls" >
+                                            <select id="select_year2" v-model="year" :rel="year"></select>年
+                                            <select id="select_month2"  v-model="month" :rel="month"></select>月
+                                            <select id="select_day2"  v-model="day" :rel="day"></select>日
+                                        </div>
+                                    </div>
+
+
+                                    <div class="control-group">
+                                        <label for="inputPassword" class="control-label">所在地：</label>
+                                        <div class="controls">
+                                            <div data-toggle="distpicker">
+                                                <div class="form-group area">
+                                                    <select class="form-control" v-model="user.province" id="province1"></select>
+                                                </div>
+                                                <div class="form-group area">
+                                                    <select class="form-control" v-model="user.city" id="city1"></select>
+                                                </div>
+                                                <div class="form-group area">
+                                                    <select class="form-control" v-model="user.district" id="district1"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="inputJob" class="control-label">职业：</label>
+                                        <div class="controls"><span class="sui-dropdown dropdown-bordered select"><span class="dropdown-inner"><a role="button" data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                                <input name="job" type="hidden"  v-model="user.job"  data-rules="required"><i class="caret"></i><span>请选择</span></a>
+                                            <ul id="menu4" role="menu" aria-labelledby="drop4" class="sui-dropdown-menu">
+                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="bj" @click="user.job='程序员'">程序员</a></li>
+                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="sb" @click="user.job='产品经理'">产品经理</a></li>
+                                                <li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);" value="sb"  @click="user.job='UI设计师'">UI设计师</a></li>
+                                            </ul>
+                                            </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="sanwei" class="control-label"></label>
+                                        <div class="controls">
+                                            <button type="submit" class="sui-btn btn-primary" @click.prevent="submit">保存修改</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="two" class="tab-pane">
+
+                                <div class="new-photo">
+                                    <p>当前头像：</p>
+                                    <div class="upload">
+                                        <img id="imgShow_WU_FILE_0" width="100" height="100" :src="user.image" alt="">
+                                        <!--<input type="file" id="up_img_WU_FILE_0" />-->
+                                        <input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<!-- 底部栏位 -->
+	<!--页面底部，由js动态加载-->
+	<div class="clearfix footer"></div>
+	<script type="text/javascript">$(".footer").load("foot.html");</script>
+	<!--页面底部END-->
+
+
+<script src="./js/vue/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./js/common.js"></script>
+<script type="text/javascript">
+
+    var homeInfo=new Vue({
+        el:"#account",
+        data:{
+
+            userInfo:[],     //用户信息
+            user:{
+                nickName: '',
+                gender:'',
+                province:'',
+                city:'',
+                district:'',
+                job:'',
+                image:'',
+            },
+            year:1992,
+            month:3,
+            day:26
+        },
+        methods:{
+            update(e) {
+                let file = e.target.files[0];
+                let param = new FormData(); //创建form对象
+                param.append('file',file,file.name);//通过append向form对象添加数据
+                let config = {
+                    headers:{'Content-Type':'application/x-www-form-urlencoded'}
+                };  //添加请求头
+                ly.http.post('/upload/image',param,config).then(response=>{
+                        console.log(response.data);
+                        this.user.image = response.data;
+                    })
+            },
+
+            submit() {
+              ly.verifyUser().then(()=>{
+                  this.user.birthday = this.birthday;
+                  //提交的话
+                  ly.http.post("/user/userDetail/", this.user).then(
+                      ()=>{
+                          console.log("添加成功");
+                          alert("修改成功");
+                      }
+                  );
+              }).catch(()=>{
+                  window.location.href = "login.html"
+              })
+            },
+            loadUserDetail() {
+
+            }
+        },
+        computed:{
+            birthday() {
+          //生日的设计
+          let date = new Date();
+                date.setFullYear(this.year);
+                date.setMonth(this.month);
+                date.setDate(this.day);
+                return date;
+            }
+        },
+        created(){
+            ly.http.get("/user/userDetail/").then(
+                resp => {
+                    if (resp.data) {
+                        this.user = resp.data;
+                        debugger;
+                        let date = new Date(this.user.birthday);
+
+                        this.year = date.getFullYear();
+                        this.month =  date.getMonth();
+                        this.day =  date.getDate();
+
+                    }
+                }
+            ).catch(() => {
+                console.log("服务器异常");
+            });
+            //页面加载发送ajax请求，判断是否登录
+            ly.http.get("auth/verify").then((resp) => {
+                //如果用户登陆了，则加载个人中心页面
+                this.userInfo = resp.data;
+
+            }).catch(() => {
+                //如果用户没有登录，则重定向到登录页面
+                window.location.href = "login.html"
+            });
+        }
+
+    })
+
+</script>
+
+</html>
